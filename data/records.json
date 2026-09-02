@@ -25,14 +25,5 @@
     "amount": 10000,
     "notes": "",
     "image": null
-  },
-  {
-    "id": "rec-102",
-    "name": "Sis. Grace & Family",
-    "address": "Plot 89, Jubilee Hills, Hyderabad",
-    "amount": 25000,
-    "dateTime": "2026-08-29T14:15",
-    "notes": "Special prayer pledge contribution",
-    "image": null
   }
 ]
