@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ShieldCheck, KeyRound, UserCheck, X, AlertCircle } from 'lucide-react';
 
-export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
+export function LoginModal({ isOpen, onClose, onLoginSuccess, currentPastorPassword }) {
   const [nameInput, setNameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -15,9 +15,11 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     const trimmedName = nameInput.trim();
     const trimmedPass = passwordInput.trim();
 
-    // Exact credentials validation: Pallapati Cornelius / Pallapati Cornelius
-    if (trimmedName === 'Pallapati Cornelius' && trimmedPass === 'Pallapati Cornelius') {
-      onLoginSuccess('Pallapati Cornelius');
+    // Strict credential validation against current active pastor password
+    const isValidPass = trimmedPass === currentPastorPassword;
+
+    if (trimmedName.length > 0 && isValidPass) {
+      onLoginSuccess(trimmedName);
       onClose();
     } else {
       setErrorMsg('Invalid Pastor Credentials! Please check the Pastor Name and Password.');

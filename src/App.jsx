@@ -7,11 +7,13 @@ import { LoginModal } from './components/LoginModal';
 import { RecordModal } from './components/RecordModal';
 import { ImageModal } from './components/ImageModal';
 import { ImportExcelModal } from './components/ImportExcelModal';
+import { ChangePasswordModal } from './components/ChangePasswordModal';
 import { dbService } from './services/dbService';
 
 export default function App() {
   const [records, setRecords] = useState([]);
   const [targetGoal, setTargetGoal] = useState(1500000);
+  const [pastorPassword, setPastorPassword] = useState('23kd1a05@N7');
   const [isPastorLoggedIn, setIsPastorLoggedIn] = useState(false);
   const [pastorName, setPastorName] = useState('Pallapati Cornelius');
 
@@ -22,6 +24,7 @@ export default function App() {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageModalData, setImageModalData] = useState({ src: '', title: '' });
   const [isImportExcelOpen, setIsImportExcelOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
   // Subscribe to Database Real-time Changes
   useEffect(() => {
@@ -33,9 +36,14 @@ export default function App() {
       setTargetGoal(goal);
     });
 
+    const unsubscribePassword = dbService.subscribeToPassword((pass) => {
+      setPastorPassword(pass);
+    });
+
     return () => {
       unsubscribeRecords();
       unsubscribeGoal();
+      unsubscribePassword();
     };
   }, []);
 
@@ -78,6 +86,11 @@ export default function App() {
     await dbService.updateGoal(newGoal);
   };
 
+  // Update Password Handler
+  const handleSavePassword = async (newPassword) => {
+    await dbService.updatePassword(newPassword);
+  };
+
   // Import Excel Handler
   const handleImportExcelSuccess = async (importedRows) => {
     const count = await dbService.importBulkRecords(importedRows);
@@ -111,6 +124,7 @@ export default function App() {
         onOpenLogin={() => setIsLoginOpen(true)}
         onLogout={handleLogout}
         onOpenAddRecord={handleOpenAdd}
+        onOpenChangePassword={() => setIsChangePasswordOpen(true)}
         records={records}
       />
 
@@ -138,6 +152,7 @@ export default function App() {
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
         onLoginSuccess={handleLoginSuccess}
+        currentPastorPassword={pastorPassword}
       />
 
       <RecordModal
@@ -158,6 +173,13 @@ export default function App() {
         isOpen={isImportExcelOpen}
         onClose={() => setIsImportExcelOpen(false)}
         onImportSuccess={handleImportExcelSuccess}
+      />
+
+      <ChangePasswordModal
+        isOpen={isChangePasswordOpen}
+        onClose={() => setIsChangePasswordOpen(false)}
+        onSavePassword={handleSavePassword}
+        currentPastorPassword={pastorPassword}
       />
     </div>
   );

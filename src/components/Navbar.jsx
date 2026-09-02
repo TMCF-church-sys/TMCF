@@ -1,8 +1,8 @@
 import React from 'react';
-import { Church, ShieldCheck, LogIn, LogOut, Download, Plus, FileSpreadsheet } from 'lucide-react';
+import { Church, ShieldCheck, LogIn, LogOut, Plus, FileSpreadsheet, KeyRound } from 'lucide-react';
 import { exportToExcel } from '../utils/excel';
 
-export function Navbar({ isPastorLoggedIn, pastorName, onOpenLogin, onLogout, onOpenAddRecord, records }) {
+export function Navbar({ isPastorLoggedIn, pastorName, onOpenLogin, onLogout, onOpenAddRecord, onOpenChangePassword, records }) {
   return (
     <header className="navbar">
       <div className="navbar-container">
@@ -34,6 +34,15 @@ export function Navbar({ isPastorLoggedIn, pastorName, onOpenLogin, onLogout, on
               <button onClick={onOpenAddRecord} className="btn btn-primary btn-add-record">
                 <Plus className="btn-icon" />
                 <span>Add Record</span>
+              </button>
+
+              <button 
+                onClick={onOpenChangePassword} 
+                className="btn btn-outline btn-change-password"
+                title="Change Pastor Access Password"
+              >
+                <KeyRound className="btn-icon" />
+                <span className="btn-text">Change Password</span>
               </button>
               
               <div className="pastor-badge-group">
