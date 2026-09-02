@@ -1,5 +1,14 @@
 [
   {
+    "id": "rec-1788318086100-kvla",
+    "dateTime": "2026-08-30T08:30",
+    "name": "Vinay and Mani",
+    "address": "Rallaveedi",
+    "amount": 10000,
+    "notes": "",
+    "image": null
+  },
+  {
     "id": "rec-1788318026472-qtwc",
     "dateTime": "2026-08-30T08:29",
     "name": "Laxman Rao garu",
