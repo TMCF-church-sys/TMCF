@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, KeyRound, UserCheck, X, AlertCircle, Sparkles } from 'lucide-react';
+import { ShieldCheck, KeyRound, UserCheck, X, AlertCircle } from 'lucide-react';
 
 export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [nameInput, setNameInput] = useState('');
@@ -22,12 +22,6 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     } else {
       setErrorMsg('Invalid Pastor Credentials! Please check the Pastor Name and Password.');
     }
-  };
-
-  const handleAutoFillPastor = () => {
-    setNameInput('Pallapati Cornelius');
-    setPasswordInput('Pallapati Cornelius');
-    setErrorMsg('');
   };
 
   return (
@@ -54,12 +48,6 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
             </div>
           )}
 
-          {/* Shortcut Auto-Fill Helper */}
-          <div className="autofill-hint-box" onClick={handleAutoFillPastor}>
-            <Sparkles className="hint-icon" />
-            <span>Tap here to auto-fill Pastor Pallapati Cornelius credentials</span>
-          </div>
-
           <div className="form-group">
             <label className="form-label">
               <UserCheck className="label-icon" />
@@ -69,7 +57,7 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
               type="text"
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
-              placeholder="e.g. Pallapati Cornelius"
+              placeholder="Enter Pastor Name"
               className="input-field"
               required
             />
@@ -104,3 +92,4 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
     </div>
   );
 }
+
