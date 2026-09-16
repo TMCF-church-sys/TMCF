@@ -21,7 +21,7 @@
     "id": "rec-1789455189449-zsmu",
     "dateTime": "2026-09-15T12:22",
     "name": "Unknown",
-    "address": "Unknown",
+    "address": "BSTR",
     "amount": 5000,
     "notes": "",
     "image": null
